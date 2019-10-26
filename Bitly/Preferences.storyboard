@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14868"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="jtT-ld-XAZ">
+            <objects>
+                <windowController storyboardIdentifier="PreferencesWindowId" id="iqz-Su-lBV" customClass="PreferencesWindowController" customModule="Bitly" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="kDm-kh-wsj">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+                        <rect key="contentRect" x="681" y="360" width="480" height="130"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <toolbar key="toolbar" implicitIdentifier="58A3E59E-61D0-47C1-80CC-5B0C0D4F21F5" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="regular" id="9xu-QE-jIQ">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="6ACAFC45-1B10-4BC9-9FA7-8248CFA04FCB" explicitItemIdentifier="NSPreferencesGeneralItem" label="General" paletteLabel="General" tag="-1" image="NSPreferencesGeneral" selectable="YES" id="wDG-Q7-zWO">
+                                    <size key="minSize" width="32" height="32"/>
+                                    <size key="maxSize" width="32" height="32"/>
+                                    <connections>
+                                        <action selector="showGeneralView" target="iqz-Su-lBV" id="6jk-Gj-cf2"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" explicitItemIdentifier="NSToolbarPreferencesGeneralItem" id="BGr-Sb-LBf"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="id2-kH-56V"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Ey6-cf-oah"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="bLh-O0-z6P"/>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="wDG-Q7-zWO"/>
+                            </defaultToolbarItems>
+                        </toolbar>
+                        <connections>
+                            <outlet property="delegate" destination="iqz-Su-lBV" id="YHp-Ys-9GO"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <outlet property="generalToolbarItem" destination="wDG-Q7-zWO" id="eTS-rD-LOZ"/>
+                        <outlet property="settingsMenuToolbar" destination="9xu-QE-jIQ" id="P1P-PM-SKJ"/>
+                        <segue destination="S55-qv-hjX" kind="relationship" relationship="window.shadowedContentViewController" id="wzR-9C-5q7"/>
+                    </connections>
+                </windowController>
+                <customObject id="gcp-0f-u8k" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="54"/>
+        </scene>
+        <!--Preferences View Controller-->
+        <scene sceneID="nYG-wv-BXH">
+            <objects>
+                <viewController storyboardIdentifier="PreferencesVCId" id="S55-qv-hjX" customClass="PreferencesViewController" customModule="Bitly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Rh0-84-nXi">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="98"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField identifier="ApiKeyTextFieldId" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QFZ-Fz-OL6">
+                                <rect key="frame" x="105" y="57" width="355" height="21"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="bitly oauth token" drawsBackground="YES" id="C3k-jj-UhT">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="textDidChange:" target="S55-qv-hjX" id="x81-MH-CQy"/>
+                                    <outlet property="delegate" destination="S55-qv-hjX" id="3KY-AD-rRQ"/>
+                                </connections>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9UQ-AY-dIa">
+                                <rect key="frame" x="103" y="26" width="359" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Hide dock icon" bezelStyle="regularSquare" imagePosition="left" inset="2" id="e7m-La-Ar8">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="iconStateDidUpdate:" target="S55-qv-hjX" id="iVp-r9-jN3"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="11g-yQ-OFA">
+                                <rect key="frame" x="18" y="27" width="81" height="16"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Appearance:" id="rjM-I6-7Ih">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mdT-a0-J2F">
+                                <rect key="frame" x="45" y="60" width="54" height="16"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="API Key: " id="p5L-13-ca9">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="apiKeyTextField" destination="QFZ-Fz-OL6" id="qGI-tU-fx5"/>
+                        <outlet property="iconState" destination="9UQ-AY-dIa" id="8sT-cm-flL"/>
+                        <outlet property="iconStatusLabel" destination="11g-yQ-OFA" id="79Q-gB-NSi"/>
+                    </connections>
+                </viewController>
+                <customObject id="qpb-KL-cPr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="400"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="NSPreferencesGeneral" width="32" height="32"/>
+    </resources>
+</document>
