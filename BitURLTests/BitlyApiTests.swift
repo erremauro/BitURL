@@ -213,6 +213,81 @@ class BitlyApiTests: XCTestCase {
         
         waitForExpectations(timeout: 10, handler: nil)
     }
+    
+    func testShouldReverseValidBitlyLink() {
+        let expectation = self.expectation(description: "shouldBeAuthenticated")
+        let mockUserDefaultsContainer = MockUserDefaultsContainer()
+        mockUserDefaultsContainer.apiKey = API_KEY
+        
+        let mockUserDefaultsService = UserDefaultsService(settings: mockUserDefaultsContainer)
+        let api = BitlyApi(userDefaults: mockUserDefaultsService)
+        let bitlyURL = "http://bit.ly/32uy8JB"
+        let expectedURL = "http://www.google.com/"
+        
+        api.reverse(url: bitlyURL) { result in
+            switch result {
+            case .success(let shortURL):
+                XCTAssertEqual(expectedURL, shortURL.longUrl)
+                expectation.fulfill()
+                break
+            case .failure(let error):
+                XCTAssertNil(error)
+                expectation.fulfill()
+                break
+            }
+        }
+        
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testShouldReverseBitlyLinkWithoutProtocol() {
+        let expectation = self.expectation(description: "shouldBeAuthenticated")
+        let mockUserDefaultsContainer = MockUserDefaultsContainer()
+        mockUserDefaultsContainer.apiKey = API_KEY
+        
+        let mockUserDefaultsService = UserDefaultsService(settings: mockUserDefaultsContainer)
+        let api = BitlyApi(userDefaults: mockUserDefaultsService)
+        let bitlyURL = "bit.ly/32uy8JB"
+        let expectedURL = "http://www.google.com/"
+        
+        api.reverse(url: bitlyURL) { result in
+            switch result {
+            case .success(let shortURL):
+                XCTAssertEqual(expectedURL, shortURL.longUrl)
+                expectation.fulfill()
+                break
+            case .failure(let error):
+                XCTAssertNil(error)
+                expectation.fulfill()
+                break
+            }
+        }
+        
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testShouldFailOnInvalidURLs() {
+        let expectation = self.expectation(description: "shouldBeAuthenticated")
+        let mockUserDefaultsContainer = MockUserDefaultsContainer()
+        mockUserDefaultsContainer.apiKey = API_KEY
+        
+        let mockUserDefaultsService = UserDefaultsService(settings: mockUserDefaultsContainer)
+        let api = BitlyApi(userDefaults: mockUserDefaultsService)
+        let bitlyURL = "not-a-url"
+        
+        api.reverse(url: bitlyURL) { result in
+            switch result {
+            case .success(_):
+                break
+            case .failure(let error):
+                XCTAssertEqual(error, .encodeError)
+                expectation.fulfill()
+                break
+            }
+        }
+        
+        waitForExpectations(timeout: 10, handler: nil)
+    }
 }
 
 // MARK: Mocks

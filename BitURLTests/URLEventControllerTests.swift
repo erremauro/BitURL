@@ -56,6 +56,44 @@ class URLEventControllerTests: XCTestCase {
         
         wait(for: [apiServiceExpectation, notificationCenterExpectation], timeout: 10)
     }
+    
+    func testperformReverseAction() {
+        let apiServiceExpectation = self.expectation(description: "apiServiceExpectation")
+        let notificationCenterExpectation = self.expectation(description: "notificationCenterExpectation")
+        
+        let shortURL = "https://bit.ly/test"
+        let actionName = "reverse"
+        let actionSchemaURL = "biturl://\(actionName)/\(shortURL)"
+        let expectedURL = "http://www.google.com/"
+        
+        let notificationCenter = MockNotificationCenter()
+        let pasteboardService = MockPasteboardService()
+        
+        // should post notification
+        notificationCenter.onAction = { message in
+            XCTAssertNotNil(message)
+            XCTAssertEqual(pasteboardService.stringValue, expectedURL)
+
+            notificationCenterExpectation.fulfill()
+            
+        }
+        
+        let notificationService: INotificationService = NotificationService(using: notificationCenter)
+        let apiService = MockBitlyApi()
+        
+        // should call api for URL shortening
+        apiService.onRequest = { action, shortURL in
+            XCTAssertEqual(action, .reverse)
+            XCTAssertEqual(shortURL.longUrl, expectedURL)
+            
+            apiServiceExpectation.fulfill()
+        }
+        
+        let notificationController = URLEventController(using: apiService, notificationService: notificationService, pasteboardService: pasteboardService)
+        notificationController.performAction(for: actionSchemaURL)
+        
+        wait(for: [apiServiceExpectation, notificationCenterExpectation], timeout: 10)
+    }
 }
 
 // MARK: Mocks
@@ -81,6 +119,12 @@ class MockBitlyApi: IBitlyApi {
         let shortURL = BitlyShortLink(longUrl: url, link: "https://bit.ly/test")
         result(.success(shortURL))
         onRequest(.shorten, shortURL)
+    }
+    
+    func reverse(url: String, result: @escaping (Result<BitlyShortLink, BitlyApiError>) -> Void) {
+        let shortURL = BitlyShortLink(longUrl: "http://www.google.com/", link: url)
+        result(.success(shortURL))
+        onRequest(.reverse, shortURL)
     }
 }
 

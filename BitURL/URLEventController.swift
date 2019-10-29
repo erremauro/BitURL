@@ -11,6 +11,7 @@ import Cocoa
 enum URLEventActionName {
     case noAction
     case shorten
+    case reverse
     case user
     case isAuthorized
 }
@@ -53,6 +54,9 @@ class URLEventController {
         case .shorten:
             self.shorten(url: action.params?["url"] as! String)
             break
+        case .reverse:
+            self.reverse(url: action.params?["url"] as! String)
+            break
         default:
             break
         }
@@ -78,6 +82,26 @@ class URLEventController {
         }
     }
     
+    private func reverse(url: String) {
+        apiService.reverse(url: url) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let shortURL):
+                    self.pasteboardService.setString(shortURL.longUrl)
+                    
+                    NSApplication.shared.hide(self)
+                    
+                    self.notificationService.notifySuccess(title: "URL Reversed Sucessfully", message: shortURL.longUrl)
+                    break
+                case .failure( _):
+                    NSApplication.shared.hide(self)
+                    self.notificationService.notifyFailure(title: "An Error Occured", message: "Unable to reverse url")
+                    break
+                }
+            }
+        }
+    }
+    
     private func urlEventAction(for url: String) -> URLEventAction? {
         let urlComponents = url.replacingOccurrences(of: "biturl://", with: "").split(separator: "/", maxSplits: 1, omittingEmptySubsequences: true)
         
@@ -90,6 +114,10 @@ class URLEventController {
         case "shorten":
             actionName = .shorten
             params = ["url": String(stringParams)]
+        case "reverse":
+            actionName = .reverse
+            params = ["url": String(stringParams)]
+            break
         default:
             actionName = .noAction
         }
