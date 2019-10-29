@@ -32,6 +32,8 @@ class PreferencesViewController: NSViewController {
         
         apiKeyTextField.stringValue = userDefaults.apiKey 
         hideDockIconButton.state = userDefaults.hideIcon ? NSControl.StateValue.on : NSControl.StateValue.off
+        
+        updateStatusIcon(.stopped)
                 
         NotificationService.shared.addObserver(self, selector: #selector(apiKeyDidChange(_:)), name: .apiKeyChanged)
     }
