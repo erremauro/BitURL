@@ -59,14 +59,14 @@ class FetchService: IFetchService {
                         return
                     }
                     
-                    guard let response = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] else {
+                    guard let response = self.dataToJson(data: data) as? [String:Any] else {
                         completion(.failure(.responseEncoding))
                         return
                     }
                     
                     completion(.success((status, response)))
                     break
-                case .failure(_ ):
+                case .failure(_):
                     completion(.failure(.fetchError))
                 }
         }.resume()
@@ -105,12 +105,17 @@ class FetchService: IFetchService {
     }
     
     private func jsonToData(json: Any) -> Data? {
-        do {
-            let data = try JSONSerialization.data(withJSONObject: json, options: [])
-            return data
-        } catch {
+        guard let data = try? JSONSerialization.data(withJSONObject: json, options: []) else {
             return nil
         }
+        return data
+    }
+    
+    private func dataToJson(data: Data) -> Any? {
+        guard let json = try? JSONSerialization.jsonObject(with: data, options: []) else {
+            return nil
+        }
+        return json
     }
 }
 

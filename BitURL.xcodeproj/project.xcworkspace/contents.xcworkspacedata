@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Bitly.xcodeproj">
+      location = "self:/Users/robertomauro/GitHub/xcode/Bitly/BitURL/BitURL.xcodeproj">
    </FileRef>
 </Workspace>

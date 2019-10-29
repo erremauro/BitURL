@@ -60,6 +60,19 @@ public class BitlyApi: IBitlyApi {
         request(FetchMethod.post, action: "shorten", parameters: parameters, completion: result)
     }
     
+    func reverse(url: String, result: @escaping (Result<BitlyShortLink, BitlyApiError>) -> Void) {
+        guard let urlComponents = URLComponents(string: url) else {
+            result(.failure(.invalidArgument))
+            return
+        }
+        
+        let httpProtocol = "\(urlComponents.scheme ?? "http")://"
+        let baseURL = url.replacingOccurrences(of: httpProtocol, with: "")
+        let actionURL = "bitlinks/\(baseURL)"
+        
+        request(FetchMethod.get, action: actionURL, completion: result)
+    }
+    
     /**
      Check if the current user is authorized based on the api key value.
      
@@ -117,6 +130,8 @@ public class BitlyApi: IBitlyApi {
                     case BitlyMessage.invalidLongURL:
                         completion(.failure(.invalidArgument))
                         return
+                    case BitlyMessage.alreadyShorted:
+                        completion(.failure(.invalidArgument))
                     default:
                         completion(.failure(.apiError))
                         return
@@ -164,6 +179,7 @@ struct BitlyUser: Decodable {
 struct BitlyMessage {
     static let forbidden = "FORBIDDEN"
     static let invalidLongURL = "INVALID_ARG_LONG_URL"
+    static let alreadyShorted = "ALREADY_A_BITLY_LINK"
 }
 
 struct BitlyErrorResponse: Decodable {
@@ -189,6 +205,7 @@ protocol IBitlyApi {
     func isAuthorized(result: @escaping (Result<Bool, BitlyApiError>) -> Void)
     func user(result: @escaping (Result<BitlyUser, BitlyApiError>) -> Void)
     func shorten(url: String, result: @escaping (Result<BitlyShortLink, BitlyApiError>) -> Void)
+    func reverse(url: String, result: @escaping (Result<BitlyShortLink, BitlyApiError>) -> Void)
 }
 
 // MARK: Extensions
