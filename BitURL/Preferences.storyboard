@@ -9,7 +9,7 @@
         <!--Window Controller-->
         <scene sceneID="jtT-ld-XAZ">
             <objects>
-                <windowController storyboardIdentifier="PreferencesWindowId" id="iqz-Su-lBV" customClass="PreferencesWindowController" customModule="Bitly" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="PreferencesWindowId" id="iqz-Su-lBV" customClass="PreferencesWindowController" customModule="BitURL" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="kDm-kh-wsj">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <rect key="contentRect" x="681" y="360" width="480" height="130"/>
@@ -49,15 +49,15 @@
         <!--Preferences View Controller-->
         <scene sceneID="nYG-wv-BXH">
             <objects>
-                <viewController storyboardIdentifier="PreferencesVCId" id="S55-qv-hjX" customClass="PreferencesViewController" customModule="Bitly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PreferencesVCId" id="S55-qv-hjX" customClass="PreferencesViewController" customModule="BitURL" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Rh0-84-nXi">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="98"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField identifier="ApiKeyTextFieldId" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QFZ-Fz-OL6">
-                                <rect key="frame" x="105" y="57" width="355" height="21"/>
+                                <rect key="frame" x="105" y="57" width="331" height="21"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="bitly oauth token" drawsBackground="YES" id="C3k-jj-UhT">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="7ce0ba488b0d6930ca7d0c4966d6344d75fa27fc" placeholderString="bitly oauth token" drawsBackground="YES" id="C3k-jj-UhT">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -75,7 +75,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="iconStateDidUpdate:" target="S55-qv-hjX" id="iVp-r9-jN3"/>
+                                    <action selector="hideDockIconClicked:" target="S55-qv-hjX" id="iVp-r9-jN3"/>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="11g-yQ-OFA">
@@ -96,12 +96,23 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <progressIndicator wantsLayer="YES" fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="IcE-sz-7rO">
+                                <rect key="frame" x="444" y="60" width="16" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </progressIndicator>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Yx-DM-7Bu" userLabel="Status Icon">
+                                <rect key="frame" x="442" y="58" width="18" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="SuccessIcon" id="wSu-B9-dRL"/>
+                            </imageView>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="apiKeyTextField" destination="QFZ-Fz-OL6" id="qGI-tU-fx5"/>
-                        <outlet property="iconState" destination="9UQ-AY-dIa" id="8sT-cm-flL"/>
+                        <outlet property="hideDockIconButton" destination="9UQ-AY-dIa" id="8sT-cm-flL"/>
                         <outlet property="iconStatusLabel" destination="11g-yQ-OFA" id="79Q-gB-NSi"/>
+                        <outlet property="spinIndicator" destination="IcE-sz-7rO" id="Tfj-Wl-amD"/>
+                        <outlet property="statusIconView" destination="6Yx-DM-7Bu" id="AdF-Vk-AEe"/>
                     </connections>
                 </viewController>
                 <customObject id="qpb-KL-cPr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -111,5 +122,6 @@
     </scenes>
     <resources>
         <image name="NSPreferencesGeneral" width="32" height="32"/>
+        <image name="SuccessIcon" width="18" height="18"/>
     </resources>
 </document>

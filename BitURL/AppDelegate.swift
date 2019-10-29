@@ -33,11 +33,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func handleHideIconChanged(_ aNotification: Notification) {
-        toggleIconState()
+        guard let newValue = aNotification.userInfo?["hideIcon"] as? Bool else {
+            return
+        }
+        
+        toggleIconState(isHidden: newValue)
     }
     
-    func toggleIconState() {
-        if (userDefaults.hideIcon) {
+    func toggleIconState(isHidden: Bool? = nil) {
+        let hideStatus = isHidden != nil ? isHidden : userDefaults.hideIcon
+        
+        if (hideStatus!) {
             NSApp.setActivationPolicy(NSApplication.ActivationPolicy.accessory)
         } else {
             NSApp.setActivationPolicy(NSApplication.ActivationPolicy.regular)

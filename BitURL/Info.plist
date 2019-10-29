@@ -24,10 +24,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>CFBundleURLName</key>
-			<string>erremauro.Bitly</string>
+			<string>erremauro.BitURL</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>bitly</string>
+				<string>biturl</string>
 			</array>
 		</dict>
 	</array>

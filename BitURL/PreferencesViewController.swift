@@ -15,19 +15,23 @@ extension Notification.Name {
 class PreferencesViewController: NSViewController {
     let userDefaults = UserDefaultsService.shared
     let notificationServices = NotificationService()
+    let apiService = BitlyApi()
+    var apiKey: String = ""
     
     @IBOutlet weak var iconStatusLabel: NSTextField!
     @IBOutlet weak var apiKeyTextField: NSTextField!
-    @IBOutlet weak var iconState: NSButton!
+    @IBOutlet weak var hideDockIconButton: NSButton!
+    @IBOutlet weak var statusIconView: NSImageView!
+    @IBOutlet weak var spinIndicator: NSProgressIndicator!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         iconStatusLabel.stringValue = NSLocalizedString("Appereance", comment: "Appereance label")
-        iconState.title = NSLocalizedString("Hide dock icon", comment: "Hide dock icon label")
+        hideDockIconButton.title = NSLocalizedString("Hide dock icon", comment: "Hide dock icon label")
         
         apiKeyTextField.stringValue = userDefaults.apiKey 
-        iconState.state = userDefaults.hideIcon ? NSControl.StateValue.on : NSControl.StateValue.off
+        hideDockIconButton.state = userDefaults.hideIcon ? NSControl.StateValue.on : NSControl.StateValue.off
                 
         NotificationService.shared.addObserver(self, selector: #selector(apiKeyDidChange(_:)), name: .apiKeyChanged)
     }
@@ -35,8 +39,28 @@ class PreferencesViewController: NSViewController {
     @IBAction func textDidChange(_ sender: NSTextField) {
         switch sender.identifier?.rawValue {
         case "ApiKeyTextFieldId":
-            userDefaults.apiKey = sender.stringValue
-            notificationServices.post(name: .apiKeyChanged, userInfo: ["apiKey": sender.stringValue])
+            updateStatusIcon(.progress)
+            apiKey = sender.stringValue
+            apiService.apiKey = apiKey
+            apiService.isAuthorized() { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let isAuthorized):
+                        if (isAuthorized) {
+                            self.updateStatusIcon(.success)
+                        } else {
+                            self.updateStatusIcon(.failure)
+                        }
+                        break
+                    case .failure(_):
+                        self.updateStatusIcon(.failure)
+                        break
+                    }
+                    
+                    self.userDefaults.apiKey = self.apiKey
+                    self.notificationServices.post(name: .apiKeyChanged, userInfo: ["apiKey": self.apiKey])
+                }
+            }
         default:
             break
         }
@@ -52,9 +76,21 @@ class PreferencesViewController: NSViewController {
         }
     }
     
-    @IBAction func iconStateDidUpdate(_ sender: NSButton) {
+    @IBAction func hideDockIconClicked(_ sender: NSButton) {
         let shouldHide = sender.state == NSControl.StateValue.on ? true : false
         userDefaults.hideIcon = shouldHide
         notificationServices.post(name: .hideIconChanged, userInfo: ["hideIcon": shouldHide])
+    }
+    
+    func updateStatusIcon(_ state: ApiKeyState) {
+        spinIndicator.isHidden = state != .progress
+        if (state == .progress) {
+            spinIndicator.startAnimation(self)
+        } else {
+            spinIndicator.stopAnimation(self)
+        }
+        
+        self.statusIconView.isHidden = state == .progress || state == .stopped
+        self.statusIconView.image = state == .success ? #imageLiteral(resourceName: "SuccessIcon") : #imageLiteral(resourceName: "ErrorIcon")
     }
 }

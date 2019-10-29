@@ -61,7 +61,6 @@ class MainViewController: NSViewController, NSWindowDelegate {
                     break
                 }
             }
-            
         }
         
     }
@@ -69,8 +68,14 @@ class MainViewController: NSViewController, NSWindowDelegate {
     @IBAction func doneButtonClicked(_ sender: NSButton) {
         print("Will set apiKey: \(apiKey)")
         UserDefaultsService.shared.apiKey = apiKey
-        UserDefaultsService.shared.hideIcon = hideDockIconButton.state == NSControl.StateValue.on ? true : false
         NotificationService.shared.post(name: .apiKeyChanged, userInfo: ["apiKey": apiKey])
+        
+        let shouldHideDockIcon = hideDockIconButton.state == NSControl.StateValue.on ? true : false
+        
+        if (userDefaults.hideIcon != shouldHideDockIcon) {
+            UserDefaultsService.shared.hideIcon = hideDockIconButton.state == NSControl.StateValue.on ? true : false
+            NotificationService.shared.post(name: .hideIconChanged, userInfo: ["hideIcon": shouldHideDockIcon])
+        }
         self.view.window?.orderOut(self)
     }
     
