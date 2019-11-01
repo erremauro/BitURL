@@ -93,6 +93,6 @@ class PreferencesViewController: NSViewController {
         }
         
         self.statusIconView.isHidden = state == .progress || state == .stopped
-        self.statusIconView.image = state == .success ? #imageLiteral(resourceName: "SuccessIcon") : #imageLiteral(resourceName: "ErrorIcon")
+        self.statusIconView.image = state == .success ? #imageLiteral(resourceName: "SuccessIcon") : #imageLiteral(resourceName: "FailureIcon")
     }
 }

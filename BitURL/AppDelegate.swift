@@ -53,8 +53,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let statusBar = NSStatusBar.system
         statusBarItem = statusBar.statusItem(withLength: NSStatusItem.squareLength)
-        statusBarItem.button?.image = #imageLiteral(resourceName: "StatusBarLight")
-        statusBarItem.button?.alternateImage = #imageLiteral(resourceName: "StatusBarDark")
+        statusBarItem.button?.image = #imageLiteral(resourceName: "StatusBarIcon")
         
         let statusBarMenu = NSMenu(title: "Bitly StatusBar Menu")
         statusBarItem.menu = statusBarMenu
