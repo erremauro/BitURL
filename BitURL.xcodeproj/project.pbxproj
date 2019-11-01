@@ -55,6 +55,7 @@
 		C3597F0A235CE7F90070B42E /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		C3597F0C235D0B5A0070B42E /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		C3597F0E235D0DDD0070B42E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		C37A0E54236C757E0005BDED /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
 		C39F3B27235CD7E4002A21A9 /* BitURL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitURL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39F3B2A235CD7E4002A21A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C39F3B2C235CD7E4002A21A9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +112,7 @@
 		C39F3B1E235CD7E4002A21A9 = {
 			isa = PBXGroup;
 			children = (
+				C37A0E54236C757E0005BDED /* CONTRIBUTING.md */,
 				C3BD5FBE2364F6BF00ADBA94 /* LICENSE */,
 				C3BD5FB32364EB1E00ADBA94 /* CHANGELOG.md */,
 				C3B5958E235DBB0C00056C3A /* README.md */,
