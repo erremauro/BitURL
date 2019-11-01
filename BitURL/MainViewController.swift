@@ -27,14 +27,18 @@ class MainViewController: NSViewController, NSWindowDelegate {
     @IBOutlet weak var hideDockIconButton: NSButton!
     @IBOutlet weak var statusIconView: NSImageView!
     @IBOutlet weak var spinIndicator: NSProgressIndicator!
+    @IBOutlet weak var descriptionTextView: NSTextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         doneButton.title = NSLocalizedString("Done", comment: "Done button label")
-        hideDockIconButton.stringValue = NSLocalizedString("Hide dock icon", comment: "Hide dock icon label")
+        apiKeyTextField.placeholderString = NSLocalizedString("TokenPlaceholder", comment: "Token placeholder description")
+        hideDockIconButton.title = NSLocalizedString("Hide dock icon", comment: "Hide dock icon label")
         hideDockIconButton.state = userDefaults.hideIcon ? NSControl.StateValue.on : NSControl.StateValue.off
-        
+        descriptionTextView.string = NSLocalizedString("WelcomeDescription", comment: "Welcome Page Description")
+        descriptionTextView.alignment = NSTextAlignment.center
+        descriptionTextView.font = NSFont.systemFont(ofSize: 14.0)
         updateStatusIcon(.stopped)
     }
     
@@ -94,7 +98,7 @@ class MainViewController: NSViewController, NSWindowDelegate {
         }
         
         self.statusIconView.isHidden = state == .progress || state == .stopped
-        self.statusIconView.image = state == .success ? #imageLiteral(resourceName: "SuccessIcon") : #imageLiteral(resourceName: "ErrorIcon")
+        self.statusIconView.image = state == .success ? #imageLiteral(resourceName: "SuccessIcon") : #imageLiteral(resourceName: "FailureIcon")
         self.doneButton.isEnabled = state == .success ? true : false
     }
 

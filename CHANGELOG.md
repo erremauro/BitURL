@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog][homepage] and this project adheres to
 
 ### Fixed
 
+- Fix Welcome Page italian localization
 - Fix icons for Light and Dark mode
 
 ## [1.2.0] - 2019-10-29

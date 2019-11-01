@@ -58,7 +58,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let statusBarMenu = NSMenu(title: "Bitly StatusBar Menu")
         statusBarItem.menu = statusBarMenu
         statusBarMenu.addItem(
-            withTitle: NSLocalizedString("Preferences", comment: "Preferences label"),
+            withTitle: NSLocalizedString("Preferences...", comment: "Preferences label"),
             action: #selector(handleShowPreferences),
             keyEquivalent: "")
 
