@@ -144,9 +144,9 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="BitURLIcon" id="DoE-KQ-4j8"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Sy-zl-geq">
-                                <rect key="frame" x="154" y="98" width="120" height="50"/>
+                                <rect key="frame" x="154" y="98" width="178" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="BitURL" id="lvo-4h-GS6">
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="AppName" id="lvo-4h-GS6">
                                     <font key="font" metaFont="systemThin" size="42"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -165,7 +165,7 @@
                                 <rect key="frame" x="154" y="52" width="182" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Copyright © 2019, Roberto Mauro" id="zsc-bO-SjL">
-                                    <font key="font" metaFont="menu" size="11"/>
+                                    <font key="font" metaFont="label" size="11"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -173,6 +173,7 @@
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="appNameLabel" destination="6Sy-zl-geq" id="nKx-V7-8P6"/>
                         <outlet property="versionLabel" destination="48Q-TP-cZT" id="ipm-I8-JCO"/>
                     </connections>
                 </viewController>

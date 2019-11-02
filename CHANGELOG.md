@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog][homepage] and this project adheres to
 
 - Fix General Icon state in Preferences window to active.
 
-## [1.2.2] – 2019-11-02
+## [1.2.2] - 2019-11-02
 
 ### Fixed
 

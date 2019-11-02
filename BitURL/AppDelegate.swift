@@ -28,17 +28,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationWillFinishLaunching(_ notification: Notification) {
+        // hand URL Type Scheme call handling to URLEventController
         NSAppleEventManager.shared().setEventHandler(urlEventController, andSelector: #selector(urlEventController.handleEvent(event:replyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
         
+        // Listen for notifications
         notificationService.addObserver(self, selector: #selector(handleHideIconChanged(_:)), name: .hideIconChanged)
         notificationService.addObserver(self, selector: #selector(didShortenURL(_:)), name: .didShortenURL)
         notificationService.addObserver(self, selector: #selector(notificationDidExpired(_:)), name: .notificationDidExpired)
         
+        // Show the Welcome Page if no Api key is set
         if (userDefaults.apiKey == "") {
             let mainWC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "MainWindowId") as! MainWindowController
             mainWC.showWindow(self)
         }
         
+        // hide or show the dock icon based on the user preferences
         toggleIconState()
     }
     
@@ -51,12 +55,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func didShortenURL(_ notification: Notification) {
-        if (notificationWC == nil) {
-            notificationWC = NSStoryboard(name: "FlashNotification", bundle: .main).instantiateController(withIdentifier: "FlashNotificationWindowId") as? FlashNotificationWindowController
-        }
-        
+        // if no message has been set, do not show any flash notification
         guard (notification.userInfo?["message"] as? String) != nil else {
             return
+        }
+        
+        // how the flash notification
+        if (notificationWC == nil) {
+            notificationWC = NSStoryboard(name: "FlashNotification", bundle: .main).instantiateController(withIdentifier: "FlashNotificationWindowId") as? FlashNotificationWindowController
         }
         
         notificationWC?.title = NSLocalizedString("Copied", comment: "Copied label")
@@ -69,16 +75,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func toggleIconState(isHidden: Bool? = nil) {
-        let hideStatus = isHidden != nil ? isHidden : userDefaults.hideIcon
+        let shouldHide = isHidden != nil ? isHidden : userDefaults.hideIcon
         
-        if (hideStatus!) {
+        if (shouldHide!) {
             NSApp.setActivationPolicy(NSApplication.ActivationPolicy.accessory)
+            preferencesWC?.window?.orderOut(self)
         } else {
             NSApp.setActivationPolicy(NSApplication.ActivationPolicy.regular)
         }
     }
     
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        // configure Status Bar Menu
         let statusBar = NSStatusBar.system
         statusBarItem = statusBar.statusItem(withLength: NSStatusItem.squareLength)
         statusBarItem.button?.image = #imageLiteral(resourceName: "StatusBarIcon")
@@ -123,6 +131,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func handleQuitApplication() {
         NSApplication.shared.terminate(self)
     }
-
-
 }
