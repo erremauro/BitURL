@@ -20,7 +20,7 @@
                                     <size key="minSize" width="32" height="32"/>
                                     <size key="maxSize" width="32" height="32"/>
                                     <connections>
-                                        <action selector="generalToolbarItemClick:" target="iqz-Su-lBV" id="Rbf-ja-BCg"/>
+                                        <action selector="generalToolbarItemClicked:" target="iqz-Su-lBV" id="lVX-lK-xFJ"/>
                                     </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" explicitItemIdentifier="NSToolbarPreferencesGeneralItem" id="BGr-Sb-LBf"/>
