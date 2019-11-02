@@ -13,13 +13,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let notificationService = NotificationService.shared
     let urlEventController = URLEventController()
     let userDefaults = UserDefaultsService.shared
+    
     var statusBarItem: NSStatusItem!
-
     var preferencesWC: PreferencesWindowController?
     var notificationWC: FlashNotificationWindowController?
+    var aboutWC: NSWindowController!
     
-    @IBAction func showPreferences(sender: NSMenuItem) {
+    @IBAction func showPreferences(_ sender: NSMenuItem) {
         handleShowPreferences()
+    }
+    
+    @IBAction func showAbout(_ sender: NSMenuItem) {
+        handleShowAbout()
     }
     
     func applicationWillFinishLaunching(_ notification: Notification) {
@@ -78,13 +83,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusBarItem = statusBar.statusItem(withLength: NSStatusItem.squareLength)
         statusBarItem.button?.image = #imageLiteral(resourceName: "StatusBarIcon")
         
-        let statusBarMenu = NSMenu(title: "Bitly StatusBar Menu")
+        let statusBarMenu = NSMenu(title: "BitURL StatusBar Menu")
         statusBarItem.menu = statusBarMenu
+        
+        statusBarMenu.addItem(
+            withTitle: NSLocalizedString("About BitURL", comment: "About BitURL label"),
+            action: #selector(handleShowAbout),
+            keyEquivalent: "")
+        statusBarMenu.addItem(NSMenuItem.separator())
         statusBarMenu.addItem(
             withTitle: NSLocalizedString("Preferences...", comment: "Preferences label"),
             action: #selector(handleShowPreferences),
             keyEquivalent: "")
-
+        statusBarMenu.addItem(NSMenuItem.separator())
         statusBarMenu.addItem(
             withTitle: NSLocalizedString("Quit", comment: "Quit label"),
             action: #selector(handleQuitApplication),
@@ -98,6 +109,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         preferencesWC?.showWindow(self)
         preferencesWC?.bringToFront()
+    }
+    
+    @objc func handleShowAbout() {
+        if (aboutWC == nil) {
+            aboutWC = NSStoryboard(name: "Main", bundle: .main).instantiateController(withIdentifier: "AboutWindowId") as? NSWindowController
+        }
+
+        aboutWC?.showWindow(self)
+        aboutWC.window?.makeKeyAndOrderFront(self)
     }
 
     @objc func handleQuitApplication() {

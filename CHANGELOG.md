@@ -8,6 +8,16 @@ The format is based on [Keep a Changelog][homepage] and this project adheres to
 [homepage]: https://keepachangelog.com/en/1.0.0/
 [versioning]: https://semver.org/spec/v2.0.0.html
 
+## [Unreleased]
+
+### Added
+
+- Add About informations
+
+### Fixed
+
+- Fix General Icon state in Preferences window to active.
+
 ## [1.2.2] – 2019-11-02
 
 ### Fixed

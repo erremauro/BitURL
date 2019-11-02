@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C325972D235D9752009B5C96 /* BitlyApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C325972C235D9752009B5C96 /* BitlyApi.swift */; };
+		C326D736236DF0E500376DBA /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C326D735236DF0E500376DBA /* AboutViewController.swift */; };
 		C34AB2FC23622A2A003D5D42 /* URLEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34AB2FB23622A2A003D5D42 /* URLEventController.swift */; };
 		C3597F08235CE3090070B42E /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3597F06235CE3090070B42E /* PreferencesViewController.swift */; };
 		C3597F0B235CE7F90070B42E /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3597F0A235CE7F90070B42E /* PreferencesWindowController.swift */; };
@@ -54,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		C325972C235D9752009B5C96 /* BitlyApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitlyApi.swift; sourceTree = "<group>"; };
+		C326D735236DF0E500376DBA /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		C34AB2FB23622A2A003D5D42 /* URLEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLEventController.swift; sourceTree = "<group>"; };
 		C3597F06235CE3090070B42E /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		C3597F0A235CE7F90070B42E /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				C3597F0E235D0DDD0070B42E /* MainView.swift */,
 				C39F3B2C235CD7E4002A21A9 /* MainViewController.swift */,
 				C3597F0C235D0B5A0070B42E /* MainWindowController.swift */,
+				C326D735236DF0E500376DBA /* AboutViewController.swift */,
 				C39F3B56235CD975002A21A9 /* Preferences.storyboard */,
 				C3597F06235CE3090070B42E /* PreferencesViewController.swift */,
 				C3597F0A235CE7F90070B42E /* PreferencesWindowController.swift */,
@@ -367,6 +370,7 @@
 				C3597F08235CE3090070B42E /* PreferencesViewController.swift in Sources */,
 				C325972D235D9752009B5C96 /* BitlyApi.swift in Sources */,
 				C3BD5FA023644BCD00ADBA94 /* UserDefaultsService.swift in Sources */,
+				C326D736236DF0E500376DBA /* AboutViewController.swift in Sources */,
 				C3597F0D235D0B5A0070B42E /* MainWindowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
