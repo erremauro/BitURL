@@ -16,12 +16,30 @@ class NotificationService: INotificationService {
         self.notificationCenter = notificationCenter
     }
     
-    func notifySuccess(title: String, message: String) {
+    func notifySuccess(title: String, message: String, hideNotification: Bool = false) {
+        if (hideNotification) {
+            self.notificationCenter.post(name: .didShortenURL, userInfo: ["message": message])
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.notificationCenter.post(name: .notificationDidExpired, userInfo: nil)
+            }
+            return
+        }
+        
+        NSApplication.shared.hide(self)
         let notification = URLEventNotification(withTitle: title, message: message)
         self.notificationCenter.deliver(notification)
     }
     
-    func notifyFailure(title: String, message: String) {
+    func notifyFailure(title: String, message: String, hideNotification: Bool = false) {
+        if (hideNotification) {
+            self.notificationCenter.post(name: .didShortenURL, userInfo: ["errorMessage": message])
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.notificationCenter.post(name: .notificationDidExpired, userInfo: nil)
+            }
+            return
+        }
+        
+        NSApplication.shared.hide(self)
         let notification = URLEventNotification(withTitle: title, message: message, name: .actionFailure)
         self.notificationCenter.deliver(notification)
     }
@@ -62,8 +80,8 @@ protocol IUserNotificationCenter {
 
 protocol INotificationService {
     static var shared: INotificationService { get }
-    func notifySuccess(title: String, message: String)
-    func notifyFailure(title: String, message: String)
+    func notifySuccess(title: String, message: String, hideNotification: Bool)
+    func notifyFailure(title: String, message: String, hideNotification: Bool)
     
     func addObserver(_ observer: Any, selector: Selector, name: Notification.Name)
     func post(name: Notification.Name, userInfo: [AnyHashable: Any]?)
@@ -85,10 +103,15 @@ class URLEventNotification : NSUserNotification {
 // MARK: Extensions
 
 extension Notification.Name {
-    static let didShortenURL = Notification.Name(".didShortenURL")
+    static let didShortenURL = Notification.Name("didShortenURL")
+    static let didReverseURL = Notification.Name("didReverseURL")
 }
 
 extension Notification.Name {
     static let actionCompleted = Notification.Name("actionCompleted")
     static let actionFailure = Notification.Name("actionFailure")
+}
+
+extension Notification.Name {
+    static let notificationDidExpired = Notification.Name("notificationDidExpired")
 }

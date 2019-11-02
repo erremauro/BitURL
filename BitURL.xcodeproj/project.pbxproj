@@ -13,6 +13,10 @@
 		C3597F0B235CE7F90070B42E /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3597F0A235CE7F90070B42E /* PreferencesWindowController.swift */; };
 		C3597F0D235D0B5A0070B42E /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3597F0C235D0B5A0070B42E /* MainWindowController.swift */; };
 		C3597F0F235D0DDD0070B42E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3597F0E235D0DDD0070B42E /* MainView.swift */; };
+		C3843669236C9E5F00825FBF /* FlashNotificationWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3843668236C9E5F00825FBF /* FlashNotificationWindowController.swift */; };
+		C384366B236C9E8D00825FBF /* FlashNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C384366A236C9E8D00825FBF /* FlashNotificationViewController.swift */; };
+		C384366D236C9EA700825FBF /* FlashNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C384366C236C9EA700825FBF /* FlashNotificationView.swift */; };
+		C3843671236CCCD300825FBF /* FlashNotification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3843670236CCCD300825FBF /* FlashNotification.storyboard */; };
 		C39F3B2B235CD7E4002A21A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39F3B2A235CD7E4002A21A9 /* AppDelegate.swift */; };
 		C39F3B2D235CD7E4002A21A9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39F3B2C235CD7E4002A21A9 /* MainViewController.swift */; };
 		C39F3B2F235CD7E6002A21A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C39F3B2E235CD7E6002A21A9 /* Assets.xcassets */; };
@@ -56,6 +60,10 @@
 		C3597F0C235D0B5A0070B42E /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		C3597F0E235D0DDD0070B42E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		C37A0E54236C757E0005BDED /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
+		C3843668236C9E5F00825FBF /* FlashNotificationWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashNotificationWindowController.swift; sourceTree = "<group>"; };
+		C384366A236C9E8D00825FBF /* FlashNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashNotificationViewController.swift; sourceTree = "<group>"; };
+		C384366C236C9EA700825FBF /* FlashNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashNotificationView.swift; sourceTree = "<group>"; };
+		C3843670236CCCD300825FBF /* FlashNotification.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FlashNotification.storyboard; sourceTree = "<group>"; };
 		C39F3B27235CD7E4002A21A9 /* BitURL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitURL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39F3B2A235CD7E4002A21A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C39F3B2C235CD7E4002A21A9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -143,15 +151,19 @@
 				C39F3B2E235CD7E6002A21A9 /* Assets.xcassets */,
 				C39F3B33235CD7E6002A21A9 /* Info.plist */,
 				C39F3B34235CD7E6002A21A9 /* BitURL.entitlements */,
+				C39F3B30235CD7E6002A21A9 /* Main.storyboard */,
+				C3597F0E235D0DDD0070B42E /* MainView.swift */,
+				C39F3B2C235CD7E4002A21A9 /* MainViewController.swift */,
+				C3597F0C235D0B5A0070B42E /* MainWindowController.swift */,
 				C39F3B56235CD975002A21A9 /* Preferences.storyboard */,
 				C3597F06235CE3090070B42E /* PreferencesViewController.swift */,
 				C3597F0A235CE7F90070B42E /* PreferencesWindowController.swift */,
-				C39F3B30235CD7E6002A21A9 /* Main.storyboard */,
-				C3597F0C235D0B5A0070B42E /* MainWindowController.swift */,
-				C3597F0E235D0DDD0070B42E /* MainView.swift */,
-				C39F3B2C235CD7E4002A21A9 /* MainViewController.swift */,
-				C325972C235D9752009B5C96 /* BitlyApi.swift */,
+				C3843670236CCCD300825FBF /* FlashNotification.storyboard */,
+				C384366C236C9EA700825FBF /* FlashNotificationView.swift */,
+				C384366A236C9E8D00825FBF /* FlashNotificationViewController.swift */,
+				C3843668236C9E5F00825FBF /* FlashNotificationWindowController.swift */,
 				C34AB2FB23622A2A003D5D42 /* URLEventController.swift */,
+				C325972C235D9752009B5C96 /* BitlyApi.swift */,
 				C3BD5F9F23644BCD00ADBA94 /* UserDefaultsService.swift */,
 				C3BD5FA12364650500ADBA94 /* NotificationService.swift */,
 				C3BD5FAA2364DB2F00ADBA94 /* PasteboardService.swift */,
@@ -313,6 +325,7 @@
 			files = (
 				C3BD5FBD2364F49400ADBA94 /* Localizable.strings in Resources */,
 				C39F3B57235CD975002A21A9 /* Preferences.storyboard in Resources */,
+				C3843671236CCCD300825FBF /* FlashNotification.storyboard in Resources */,
 				C3BD5FBC2364F49400ADBA94 /* Localizable.strings in Resources */,
 				C39F3B2F235CD7E6002A21A9 /* Assets.xcassets in Resources */,
 				C39F3B32235CD7E6002A21A9 /* Main.storyboard in Resources */,
@@ -343,8 +356,11 @@
 				C39F3B2D235CD7E4002A21A9 /* MainViewController.swift in Sources */,
 				C3BD5FAB2364DB2F00ADBA94 /* PasteboardService.swift in Sources */,
 				C34AB2FC23622A2A003D5D42 /* URLEventController.swift in Sources */,
+				C3843669236C9E5F00825FBF /* FlashNotificationWindowController.swift in Sources */,
+				C384366B236C9E8D00825FBF /* FlashNotificationViewController.swift in Sources */,
 				C3597F0F235D0DDD0070B42E /* MainView.swift in Sources */,
 				C3AA27AD23661F2900C5D7F7 /* FetchService.swift in Sources */,
+				C384366D236C9EA700825FBF /* FlashNotificationView.swift in Sources */,
 				C3BD5FA22364650500ADBA94 /* NotificationService.swift in Sources */,
 				C39F3B2B235CD7E4002A21A9 /* AppDelegate.swift in Sources */,
 				C3597F0B235CE7F90070B42E /* PreferencesWindowController.swift in Sources */,

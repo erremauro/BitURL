@@ -14,6 +14,10 @@ The format is based on [Keep a Changelog][homepage] and this project adheres to
 
 - Add success and failure icons for different resolutions
 
+### Changed
+
+- Add the ability to hide system notifications from Preferences. In this case a flash notification will be shown instead.
+
 ### Fixed
 
 - Fix Welcome Page italian localization

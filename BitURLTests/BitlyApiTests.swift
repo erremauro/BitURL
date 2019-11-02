@@ -295,4 +295,5 @@ class BitlyApiTests: XCTestCase {
 class MockUserDefaultsContainer: ISettings {
     var apiKey: String = ""
     var hideIcon: Bool = false
+    var hideNotifications: Bool = false
 }

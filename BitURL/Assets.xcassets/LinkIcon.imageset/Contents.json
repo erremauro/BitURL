@@ -2,12 +2,34 @@
   "images" : [
     {
       "idiom" : "mac",
-      "filename" : "linkIcon@x1.pdf",
+      "filename" : "linkIconDark@x1-1.pdf",
       "scale" : "1x"
     },
     {
       "idiom" : "mac",
+      "filename" : "linkIcon@x1.pdf",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "mac",
+      "filename" : "linkIconDark@x2-1.pdf",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "mac",
       "filename" : "linkIcon@x2.pdf",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
       "scale" : "2x"
     }
   ],

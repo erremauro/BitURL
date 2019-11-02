@@ -1,6 +1,6 @@
 #  BitURL
 
-An macOS 10.14+ agent to shorten long URLs using the [Bitly](http://bitly.com) 
+A macOS 10.14+ agent to shorten long URLs using the [Bitly](http://bitly.com) 
 API Service.
 
 To shorten a URL call:

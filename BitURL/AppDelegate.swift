@@ -10,11 +10,13 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    let notificationService = NotificationService.shared
     let urlEventController = URLEventController()
     let userDefaults = UserDefaultsService.shared
     var statusBarItem: NSStatusItem!
 
     var preferencesWC: PreferencesWindowController?
+    var notificationWC: FlashNotificationWindowController?
     
     @IBAction func showPreferences(sender: NSMenuItem) {
         handleShowPreferences()
@@ -23,21 +25,39 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillFinishLaunching(_ notification: Notification) {
         NSAppleEventManager.shared().setEventHandler(urlEventController, andSelector: #selector(urlEventController.handleEvent(event:replyEvent:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
         
-        NotificationService.shared.addObserver(self, selector: #selector(handleHideIconChanged(_:)), name: .hideIconChanged)
-        toggleIconState()
-        
+        notificationService.addObserver(self, selector: #selector(handleHideIconChanged(_:)), name: .hideIconChanged)
+        notificationService.addObserver(self, selector: #selector(didShortenURL(_:)), name: .didShortenURL)
+        notificationService.addObserver(self, selector: #selector(notificationDidExpired(_:)), name: .notificationDidExpired)
         if (userDefaults.apiKey == "") {
             let mainWC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "MainWindowId") as! MainWindowController
             mainWC.showWindow(self)
         }
     }
     
-    @objc func handleHideIconChanged(_ aNotification: Notification) {
-        guard let newValue = aNotification.userInfo?["hideIcon"] as? Bool else {
+    @objc func handleHideIconChanged(_ notification: Notification) {
+        guard let newValue = notification.userInfo?["hideIcon"] as? Bool else {
+            return
+        }
+                
+        toggleIconState(isHidden: newValue)
+    }
+    
+    @objc func didShortenURL(_ notification: Notification) {
+        if (notificationWC == nil) {
+            notificationWC = NSStoryboard(name: "FlashNotification", bundle: .main).instantiateController(withIdentifier: "FlashNotificationWindowId") as? FlashNotificationWindowController
+        }
+        
+        guard let newValue = notification.userInfo?["message"] as? String else {
             return
         }
         
-        toggleIconState(isHidden: newValue)
+        notificationWC?.title = NSLocalizedString("Copied", comment: "Copied label")
+        notificationWC?.icon = #imageLiteral(resourceName: "LinkIcon")
+        notificationWC?.fadeIn(self)
+    }
+    
+    @objc func notificationDidExpired(_ notification: Notification) {
+        notificationWC?.fadeOut(self)
     }
     
     func toggleIconState(isHidden: Bool? = nil) {
@@ -67,7 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             action: #selector(handleQuitApplication),
             keyEquivalent: "")
     }
-    
+        
     @objc func handleShowPreferences() {
         if (preferencesWC == nil) {
             preferencesWC = NSStoryboard(name: "Preferences", bundle: nil).instantiateController(withIdentifier: "PreferencesWindowId") as? PreferencesWindowController
@@ -75,7 +95,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         preferencesWC?.showWindow(self)
         preferencesWC?.bringToFront()
-        
     }
 
     @objc func handleQuitApplication() {
@@ -84,4 +103,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
 }
-

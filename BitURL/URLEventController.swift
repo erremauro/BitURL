@@ -26,11 +26,13 @@ class URLEventController {
     var notificationService: INotificationService!
     var apiService: IBitlyApi!
     var pasteboardService: IPasteboardService!
+    var userDefaults: UserDefaultsService!
     
-    init(using apiService: IBitlyApi = BitlyApi.shared, notificationService: INotificationService = NotificationService(), pasteboardService: IPasteboardService = PasteboardService()) {
+    init(using apiService: IBitlyApi = BitlyApi.shared, notificationService: INotificationService = NotificationService(), pasteboardService: IPasteboardService = PasteboardService(), userDefaults: UserDefaultsService = UserDefaultsService.shared) {
         self.apiService = apiService
         self.notificationService = notificationService
         self.pasteboardService = pasteboardService
+        self.userDefaults = userDefaults
     }
     
     @objc func handleEvent(event: NSAppleEventDescriptor, replyEvent: NSAppleEventDescriptor) {
@@ -68,15 +70,11 @@ class URLEventController {
                 switch result {
                 case .success(let shortURL):
                     self.pasteboardService.setString(shortURL.link)
-                    
-                    NSApplication.shared.hide(self)
-                    
-                    self.notificationService.notifySuccess(title: "URL Shortened Sucessfully", message: shortURL.link)
-                    break
+                    self.notificationService.notifySuccess(title: "URL Shortened Sucessfully", message: shortURL.link, hideNotification: self.userDefaults.hideNotifications)
+                    return
                 case .failure( _):
-                    NSApplication.shared.hide(self)
-                    self.notificationService.notifyFailure(title: "An Error Occured", message: "Unable to shorten url")
-                    break
+                    self.notificationService.notifyFailure(title: "An Error Occured", message: "Unable to shorten url", hideNotification: self.userDefaults.hideNotifications)
+                    return
                 }
             }
         }
@@ -88,15 +86,11 @@ class URLEventController {
                 switch result {
                 case .success(let shortURL):
                     self.pasteboardService.setString(shortURL.longUrl)
-                    
-                    NSApplication.shared.hide(self)
-                    
-                    self.notificationService.notifySuccess(title: "URL Reversed Sucessfully", message: shortURL.longUrl)
-                    break
+                    self.notificationService.notifySuccess(title: "URL Reversed Sucessfully", message: shortURL.longUrl, hideNotification: self.userDefaults.hideNotifications)
+                    return
                 case .failure( _):
-                    NSApplication.shared.hide(self)
-                    self.notificationService.notifyFailure(title: "An Error Occured", message: "Unable to reverse url")
-                    break
+                    self.notificationService.notifyFailure(title: "An Error Occured", message: "Unable to reverse url", hideNotification: self.userDefaults.hideNotifications)
+                    return
                 }
             }
         }

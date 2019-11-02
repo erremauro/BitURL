@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="nV6-NM-HpH">
+            <objects>
+                <windowController storyboardIdentifier="FlashNotificationWindowId" id="EbZ-9v-Wyg" customClass="FlashNotificationWindowController" customModule="BitURL" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Flash Notification" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="FlashNotificationAutosaveId" animationBehavior="default" titleVisibility="hidden" id="YRi-br-6jY">
+                        <windowPositionMask key="initialPositionMask" bottomStrut="YES"/>
+                        <rect key="contentRect" x="728" y="140" width="200" height="200"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <connections>
+                            <outlet property="delegate" destination="EbZ-9v-Wyg" id="0ZP-6t-amp"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="LUq-Y1-JNz" kind="relationship" relationship="window.shadowedContentViewController" id="TqP-GK-TOp"/>
+                    </connections>
+                </windowController>
+                <customObject id="HMY-04-VkI" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="68" y="120"/>
+        </scene>
+        <!--Flash Notification View Controller-->
+        <scene sceneID="NjE-fZ-Isr">
+            <objects>
+                <viewController id="LUq-Y1-JNz" customClass="FlashNotificationViewController" customModule="BitURL" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" identifier="FlashNotificationViewId" id="x9g-9D-QLj" customClass="FlashNotificationView" customModule="BitURL" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <visualEffectView fixedFrame="YES" blendingMode="behindWindow" material="appearanceBased" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="F2j-fE-FUW">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" id="ZiN-LH-kax">
+                                        <rect key="frame" x="36" y="52" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="LinkIcon" id="yZM-7S-KEv"/>
+                                    </imageView>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" id="56d-Q7-tYh">
+                                        <rect key="frame" x="0.0" y="20" width="200" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Notification Title" id="9Fq-Ug-e02">
+                                            <font key="font" metaFont="system" size="18"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                            </visualEffectView>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="notificationIconView" destination="ZiN-LH-kax" id="ypz-OQ-qrH"/>
+                        <outlet property="notificationTitleTextField" destination="56d-Q7-tYh" id="cPi-DE-ly9"/>
+                    </connections>
+                </viewController>
+                <customObject id="Ld0-AT-MV4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="68" y="549"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="LinkIcon" width="512" height="512"/>
+    </resources>
+</document>

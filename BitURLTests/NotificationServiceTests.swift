@@ -33,7 +33,6 @@ class NotificationServiceTests: XCTestCase {
         notificationService.notifySuccess(title: "Test Title", message: "Test Message")
         
         waitForExpectations(timeout: 10, handler: nil)
-
     }
     
     func testFailureNotification() {
@@ -48,6 +47,38 @@ class NotificationServiceTests: XCTestCase {
         }
         let notificationService = NotificationService(using: mockNotificationCenter)
         notificationService.notifyFailure(title: "Test Title", message: "Test Message")
+        
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testHiddenNotificationsSuccess() {
+        let expectation = self.expectation(description: "hiddenNotificationsSuccess")
+        let mockNotificationCenter = MockNotificationCenter()
+        let expectedNotificationString = "[post] didShortenURL: Optional([AnyHashable(\"message\"): \"Test Message\"])"
+        
+        mockNotificationCenter.onAction = { message in
+            XCTAssertEqual(expectedNotificationString, message)
+            
+            expectation.fulfill()
+        }
+        let notificationService = NotificationService(using: mockNotificationCenter)
+        notificationService.notifySuccess(title: "Test Title", message: "Test Message", hideNotification: true)
+        
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testHiddenNotificationsFailure() {
+        let expectation = self.expectation(description: "hiddenNotificationsFailure")
+        let mockNotificationCenter = MockNotificationCenter()
+        let expectedNotificationString = "[post] didShortenURL: Optional([AnyHashable(\"errorMessage\"): \"Test Message\"])"
+        
+        mockNotificationCenter.onAction = { message in
+            XCTAssertEqual(expectedNotificationString, message)
+            
+            expectation.fulfill()
+        }
+        let notificationService = NotificationService(using: mockNotificationCenter)
+        notificationService.notifyFailure(title: "Test Title", message: "Test Message", hideNotification: true)
         
         waitForExpectations(timeout: 10, handler: nil)
     }
@@ -95,7 +126,7 @@ class MockNotificationCenter: IUserNotificationCenter {
     }
     
     func post(name: Notification.Name, userInfo: [AnyHashable : Any]?) {
-        onAction("[post] \(name.rawValue): \(String(describing: userInfo)) ")
+        onAction("[post] \(name.rawValue): \(String(describing: userInfo))")
     }
     
     func formatNotification(_ notification: NSUserNotification) -> String {
