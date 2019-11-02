@@ -47,7 +47,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             notificationWC = NSStoryboard(name: "FlashNotification", bundle: .main).instantiateController(withIdentifier: "FlashNotificationWindowId") as? FlashNotificationWindowController
         }
         
-        guard let newValue = notification.userInfo?["message"] as? String else {
+        guard (notification.userInfo?["message"] as? String) != nil else {
             return
         }
         
