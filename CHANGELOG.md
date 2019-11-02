@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog][homepage] and this project adheres to
 [homepage]: https://keepachangelog.com/en/1.0.0/
 [versioning]: https://semver.org/spec/v2.0.0.html
 
+## [1.2.2] – 2019-11-02
+
+### Fixed
+
+- Restore dock icon hiding at startup when specified in the preferences.
+
 ## [1.2.1] - 2019-11-02
 
 ### Added

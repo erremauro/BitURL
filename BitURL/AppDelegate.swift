@@ -28,10 +28,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         notificationService.addObserver(self, selector: #selector(handleHideIconChanged(_:)), name: .hideIconChanged)
         notificationService.addObserver(self, selector: #selector(didShortenURL(_:)), name: .didShortenURL)
         notificationService.addObserver(self, selector: #selector(notificationDidExpired(_:)), name: .notificationDidExpired)
+        
         if (userDefaults.apiKey == "") {
             let mainWC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "MainWindowId") as! MainWindowController
             mainWC.showWindow(self)
         }
+        
+        toggleIconState()
     }
     
     @objc func handleHideIconChanged(_ notification: Notification) {
