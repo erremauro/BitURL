@@ -11,12 +11,14 @@ import Cocoa
 protocol ISettings {
     var apiKey: String { get set }
     var hideIcon: Bool { get set }
+    var hideNotifications: Bool { get set}
 }
 
 class SettingsContainer: ISettings {
     private struct Keys {
         static let apiKey = "apiKey"
         static let hideIcon = "hideIcon"
+        static let hideNotifications = "hideNotifications"
     }
     
     var apiKey: String {
@@ -34,6 +36,15 @@ class SettingsContainer: ISettings {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.hideIcon)
+        }
+    }
+    
+    var hideNotifications: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: Keys.hideNotifications)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.hideNotifications)
         }
     }
 }
@@ -54,5 +65,10 @@ class UserDefaultsService {
     var hideIcon: Bool {
         get { return settings.hideIcon }
         set { settings.hideIcon = newValue }
+    }
+    
+    var hideNotifications: Bool {
+        get { return settings.hideNotifications }
+        set { settings.hideNotifications = newValue }
     }
 }
