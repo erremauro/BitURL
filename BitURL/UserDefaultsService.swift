@@ -15,6 +15,8 @@ protocol ISettings {
 }
 
 class SettingsContainer: ISettings {
+    private var userDefaults = UserDefaults.standard
+    
     private struct Keys {
         static let apiKey = "apiKey"
         static let hideIcon = "hideIcon"
@@ -23,28 +25,28 @@ class SettingsContainer: ISettings {
     
     var apiKey: String {
         get {
-            UserDefaults.standard.string(forKey: Keys.apiKey) ?? ""
+            return userDefaults.string(forKey: Keys.apiKey) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.apiKey)
+            userDefaults.set(newValue, forKey: Keys.apiKey)
         }
     }
     
     var hideIcon: Bool {
         get {
-            UserDefaults.standard.bool(forKey: Keys.hideIcon) 
+            return userDefaults.bool(forKey: Keys.hideIcon)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.hideIcon)
+            userDefaults.set(newValue, forKey: Keys.hideIcon)
         }
     }
     
     var hideNotifications: Bool {
         get {
-            UserDefaults.standard.bool(forKey: Keys.hideNotifications)
+            return userDefaults.bool(forKey: Keys.hideNotifications)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: Keys.hideNotifications)
+            userDefaults.set(newValue, forKey: Keys.hideNotifications)
         }
     }
 }

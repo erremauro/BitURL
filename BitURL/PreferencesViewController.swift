@@ -101,6 +101,7 @@ class PreferencesViewController: NSViewController {
     
     func updateStatusIcon(_ state: ApiKeyState) {
         spinIndicator.isHidden = state != .progress
+        
         if (state == .progress) {
             spinIndicator.startAnimation(self)
         } else {

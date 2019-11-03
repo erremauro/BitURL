@@ -38,12 +38,53 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Show the Welcome Page if no Api key is set
         if (userDefaults.apiKey == "") {
-            let mainWC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "MainWindowId") as! MainWindowController
+            let mainWC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "MainWCId") as! MainWindowController
             mainWC.showWindow(self)
         }
         
         // hide or show the dock icon based on the user preferences
         toggleIconState()
+    }
+    
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        // configure Status Bar Menu
+        let statusBar = NSStatusBar.system
+        statusBarItem = statusBar.statusItem(withLength: NSStatusItem.squareLength)
+        statusBarItem.button?.image = #imageLiteral(resourceName: "StatusBarIcon")
+        
+        let statusBarMenu = NSMenu(title: "BitURL StatusBar Menu")
+        statusBarMenu.setAccessibilityIdentifier("StatusBarMenuId")
+        statusBarItem.menu = statusBarMenu
+
+        statusBarMenu.addItem(NSMenuItem(
+            withTitle: NSLocalizedString("About BitURL", comment: "About BitURL label"),
+            action: #selector(handleShowAbout),
+            keyEquivalent: "",
+            identifier: "AboutMenuItemId"))
+        statusBarMenu.addItem(NSMenuItem.separator())
+        statusBarMenu.addItem(NSMenuItem(
+            withTitle: NSLocalizedString("Preferences...", comment: "Preferences label"),
+            action: #selector(handleShowPreferences),
+            keyEquivalent: "",
+            identifier: "PreferencesMenuItemId"))
+        statusBarMenu.addItem(NSMenuItem.separator())
+        statusBarMenu.addItem(NSMenuItem(
+            withTitle: NSLocalizedString("Quit", comment: "Quit label"),
+            action: #selector(handleQuitApplication),
+            keyEquivalent: "",
+            identifier: "QuitMenuItemId"))
+    }
+    
+    func toggleIconState(isHidden: Bool? = nil) {
+        let shouldHide = isHidden != nil ? isHidden : userDefaults.hideIcon
+        
+        if (shouldHide!) {
+            NSApplication.shared.hide(self)
+            NSApp.setActivationPolicy(NSApplication.ActivationPolicy.accessory)
+            preferencesWC?.window?.orderOut(self)
+        } else {
+            NSApp.setActivationPolicy(NSApplication.ActivationPolicy.regular)
+        }
     }
     
     @objc func handleHideIconChanged(_ notification: Notification) {
@@ -73,46 +114,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func notificationDidExpired(_ notification: Notification) {
         notificationWC?.fadeOut(self)
     }
-    
-    func toggleIconState(isHidden: Bool? = nil) {
-        let shouldHide = isHidden != nil ? isHidden : userDefaults.hideIcon
-        
-        if (shouldHide!) {
-            NSApp.setActivationPolicy(NSApplication.ActivationPolicy.accessory)
-            preferencesWC?.window?.orderOut(self)
-        } else {
-            NSApp.setActivationPolicy(NSApplication.ActivationPolicy.regular)
-        }
-    }
-    
-    func applicationDidFinishLaunching(_ notification: Notification) {
-        // configure Status Bar Menu
-        let statusBar = NSStatusBar.system
-        statusBarItem = statusBar.statusItem(withLength: NSStatusItem.squareLength)
-        statusBarItem.button?.image = #imageLiteral(resourceName: "StatusBarIcon")
-        
-        let statusBarMenu = NSMenu(title: "BitURL StatusBar Menu")
-        statusBarItem.menu = statusBarMenu
-        
-        statusBarMenu.addItem(
-            withTitle: NSLocalizedString("About BitURL", comment: "About BitURL label"),
-            action: #selector(handleShowAbout),
-            keyEquivalent: "")
-        statusBarMenu.addItem(NSMenuItem.separator())
-        statusBarMenu.addItem(
-            withTitle: NSLocalizedString("Preferences...", comment: "Preferences label"),
-            action: #selector(handleShowPreferences),
-            keyEquivalent: "")
-        statusBarMenu.addItem(NSMenuItem.separator())
-        statusBarMenu.addItem(
-            withTitle: NSLocalizedString("Quit", comment: "Quit label"),
-            action: #selector(handleQuitApplication),
-            keyEquivalent: "")
-    }
         
     @objc func handleShowPreferences() {
         if (preferencesWC == nil) {
-            preferencesWC = NSStoryboard(name: "Preferences", bundle: nil).instantiateController(withIdentifier: "PreferencesWindowId") as? PreferencesWindowController
+            preferencesWC = NSStoryboard(name: "Preferences", bundle: nil).instantiateController(withIdentifier: "PreferencesWCId") as? PreferencesWindowController
         }
         
         preferencesWC?.showWindow(self)
@@ -121,7 +126,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func handleShowAbout() {
         if (aboutWC == nil) {
-            aboutWC = NSStoryboard(name: "Main", bundle: .main).instantiateController(withIdentifier: "AboutWindowId") as? NSWindowController
+            aboutWC = NSStoryboard(name: "Main", bundle: .main).instantiateController(withIdentifier: "AboutWCId") as? NSWindowController
         }
 
         aboutWC?.showWindow(self)
@@ -130,5 +135,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc func handleQuitApplication() {
         NSApplication.shared.terminate(self)
+    }
+}
+
+extension NSMenuItem {
+    convenience init(withTitle title: String, action: Selector?, keyEquivalent: String = "", modifier: NSEvent.ModifierFlags? = nil, identifier: String? = nil) {
+        self.init(title: title, action: action, keyEquivalent: keyEquivalent)
+        
+        if (modifier != nil) {
+            self.keyEquivalentModifierMask = modifier!
+        }
+        
+        if (identifier != nil) {
+            self.setAccessibilityIdentifier(identifier)
+            self.identifier = NSUserInterfaceItemIdentifier(rawValue: identifier!)
+        }
     }
 }

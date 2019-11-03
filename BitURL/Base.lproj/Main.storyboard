@@ -112,8 +112,8 @@
         <!--Window Controller-->
         <scene sceneID="NUp-ND-zcA">
             <objects>
-                <windowController storyboardIdentifier="AboutWindowId" id="fJX-wy-6F5" sceneMemberID="viewController">
-                    <window key="window" title="About BitURL" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="dni-c0-ULY" customClass="NSPanel">
+                <windowController storyboardIdentifier="AboutWCId" id="fJX-wy-6F5" sceneMemberID="viewController">
+                    <window key="window" identifier="AboutWindowId" title="About BitURL" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="dni-c0-ULY" customClass="NSPanel">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="134" y="739" width="392" height="168"/>
@@ -138,12 +138,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="392" height="168"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zmb-oO-vGo">
+                            <imageView identifier="AboutIconId" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zmb-oO-vGo">
                                 <rect key="frame" x="20" y="20" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="BitURLIcon" id="DoE-KQ-4j8"/>
                             </imageView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Sy-zl-geq">
+                            <textField identifier="AboutAppNameLabelId" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Sy-zl-geq">
                                 <rect key="frame" x="154" y="98" width="178" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="AppName" id="lvo-4h-GS6">
@@ -152,7 +152,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="48Q-TP-cZT">
+                            <textField identifier="AboutVersionLabelId" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="48Q-TP-cZT">
                                 <rect key="frame" x="154" y="74" width="220" height="16"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Version 1.0.0, Build 1" id="aEZ-z0-RXr">
@@ -161,10 +161,10 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zXf-T9-RB6">
-                                <rect key="frame" x="154" y="52" width="182" height="14"/>
+                            <textField identifier="AboutCopyrightLabelId" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zXf-T9-RB6">
+                                <rect key="frame" x="154" y="20" width="187" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Copyright © 2019, Roberto Mauro" id="zsc-bO-SjL">
+                                <textFieldCell key="cell" title="Copyright © 2019 Roberto Mauro." id="zsc-bO-SjL">
                                     <font key="font" metaFont="label" size="11"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -174,6 +174,7 @@
                     </view>
                     <connections>
                         <outlet property="appNameLabel" destination="6Sy-zl-geq" id="nKx-V7-8P6"/>
+                        <outlet property="copyrightLabel" destination="zXf-T9-RB6" id="GaG-8g-1Rd"/>
                         <outlet property="versionLabel" destination="48Q-TP-cZT" id="ipm-I8-JCO"/>
                     </connections>
                 </viewController>
@@ -184,8 +185,8 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController storyboardIdentifier="MainWindowId" id="B8D-0N-5wS" customClass="MainWindowController" customModule="BitURL" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="BitURL – URL Shortner" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" userLabel="BitURL – URL Shortner">
+                <windowController storyboardIdentifier="MainWCId" id="B8D-0N-5wS" customClass="MainWindowController" customModule="BitURL" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" identifier="MainWindowId" title="BitURL – URL Shortner" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" userLabel="BitURL – URL Shortner">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
                         <rect key="contentRect" x="196" y="240" width="768" height="512"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -215,7 +216,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="BitURLIcon" id="EHD-vB-RD3"/>
                             </imageView>
-                            <button verticalHuggingPriority="750" id="vqj-FW-d2y">
+                            <button identifier="MainConfigureButtonId" verticalHuggingPriority="750" id="vqj-FW-d2y">
                                 <rect key="frame" x="334" y="13" width="100" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Configure" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="or3-Um-cbA">
@@ -226,7 +227,7 @@
                                     <action selector="doneButtonClicked:" target="XfG-lQ-9wD" id="RxG-pD-yWS"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" id="aRT-by-FW7">
+                            <textField identifier="MainApiTokenFieldId" verticalHuggingPriority="750" id="aRT-by-FW7">
                                 <rect key="frame" x="203" y="118" width="361" height="21"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" alignment="center" placeholderString="Paste your bitly oauth token here" drawsBackground="YES" id="lWq-6t-kib">
@@ -275,16 +276,16 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <progressIndicator wantsLayer="YES" fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="YDa-nt-RKC">
+                            <progressIndicator identifier="MainSpinIndicatorId" wantsLayer="YES" fixedFrame="YES" maxValue="100" displayedWhenStopped="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="YDa-nt-RKC">
                                 <rect key="frame" x="376" y="63" width="16" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </progressIndicator>
-                            <imageView identifier="SuccessIconId" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jNj-1u-LHy" userLabel="Status Icon">
+                            <imageView identifier="MainStatusIconId" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jNj-1u-LHy" userLabel="Status Icon">
                                 <rect key="frame" x="375" y="62" width="18" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="SuccessIcon" id="Cgq-Wc-TgH"/>
                             </imageView>
-                            <button verticalHuggingPriority="750" id="aSB-2S-33D">
+                            <button identifier="MainHideIconCheckboxId" verticalHuggingPriority="750" id="aSB-2S-33D">
                                 <rect key="frame" x="317" y="94" width="145" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Hide dock icon" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="s7E-7E-YyY">

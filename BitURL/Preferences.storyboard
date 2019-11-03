@@ -9,8 +9,8 @@
         <!--Window Controller-->
         <scene sceneID="jtT-ld-XAZ">
             <objects>
-                <windowController storyboardIdentifier="PreferencesWindowId" id="iqz-Su-lBV" customClass="PreferencesWindowController" customModule="BitURL" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="kDm-kh-wsj">
+                <windowController storyboardIdentifier="PreferencesWCId" id="iqz-Su-lBV" customClass="PreferencesWindowController" customModule="BitURL" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" identifier="PreferencesWindowId" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="kDm-kh-wsj">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <rect key="contentRect" x="681" y="140" width="480" height="130"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -67,7 +67,7 @@
                                     <outlet property="delegate" destination="S55-qv-hjX" id="3KY-AD-rRQ"/>
                                 </connections>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9UQ-AY-dIa">
+                            <button identifier="PreferencesHideIconId" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9UQ-AY-dIa">
                                 <rect key="frame" x="103" y="38" width="359" height="18"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Hide dock icon" bezelStyle="regularSquare" imagePosition="left" inset="2" id="e7m-La-Ar8">
@@ -100,12 +100,12 @@
                                 <rect key="frame" x="444" y="72" width="16" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                             </progressIndicator>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Yx-DM-7Bu" userLabel="Status Icon">
+                            <imageView identifier="PreferencesStatusIconId" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Yx-DM-7Bu" userLabel="Status Icon">
                                 <rect key="frame" x="442" y="70" width="18" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="SuccessIcon" id="wSu-B9-dRL"/>
                             </imageView>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HY6-oy-sfc">
+                            <button identifier="PreferencesHideNotificationsId" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HY6-oy-sfc">
                                 <rect key="frame" x="103" y="18" width="359" height="18"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Hide Notifications" bezelStyle="regularSquare" imagePosition="left" inset="2" id="iOp-OR-Qmd">
