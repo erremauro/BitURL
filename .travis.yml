@@ -1,17 +1,8 @@
 osx_image: xcode11.2
 language: swift
+xcode_scheme: BitURL
 xcode_project: BitURL.xcodeproj
+xcode_destination: platform=macOS
 branches:
   only:
     - master
-jobs:
-  include:
-    - stage: Run tests
-      script: ./Scripts/test-macOS.sh
-      os: osx
-      osx_image: xcode11.2
-    - stage: Release new version
-      script: ./Scripts/new-release.sh
-      os: osx
-      osx_image: xcode11.2
-      if: branch = master AND type = push AND fork = false

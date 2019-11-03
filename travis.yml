@@ -1,8 +1,0 @@
-osx_image: xcode11.2
-language: swift
-xcode_scheme: BitURL
-xcode_project: BitURL.xcodeproj
-xcode_destination: platform=macOS
-branches:
-  only:
-    - master
